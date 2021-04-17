@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <h3>RealPage - Apply Test</h3>
+        <h6 class="text-muted">By Diego Arenas Tangarife</h6>
+    </div>
+</section>
+<hr />
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Username")))
+                {
+                    <h4>Select an option.</h4>
+                    <h5 class="text-muted">You are Admin</h5>
+                    <a class="btn btn-outline-success" asp-area="" asp-controller="Home" asp-action="Index">TV Maze</a>
+                    <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index">TV Maze</a>
+
+                    @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")) && Encrypt.Base64Decode(HttpContextAccessor.HttpContext.Session.GetString("Role")) == Roles.Admin.ToString())
+                    {
+                        <a class="btn btn-outline-warning" href="#" onclick="GetElements('Users')">Manage Users</a>
+                    }
+
+                }
+                else
+                {
+                    <h4>To see the options, please log in.</h4>
+                    <a class="btn btn-outline-dark mx-1" href="#" onclick="ToggleLogin()"><i class="fas fa-user"></i> Log In</a>
+                    <a class="btn btn-outline-dark mx-1" href="#" onclick="ToggleRegister()"><i class="fas fa-check"></i> Register</a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{ 
+    <script type="text/javascript">
+        (async () => {
+
+
+        })();
+    </script>
+}

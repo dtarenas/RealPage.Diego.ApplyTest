@@ -1,0 +1,91 @@
+﻿@model RealPage.Diego.ApplyTest.Core.DTOs.Responses.Users.UserEditDTO
+
+<div class="card">
+    <div class="card-header">
+        <h4>User Edit (@Model.UserName)</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" asp-controller="Users" method="post" id="frmEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+                <input asp-for="UserId" type="hidden" />
+                <input asp-for="FirstName" type="hidden" />
+                <input asp-for="LastName" type="hidden" />
+                <input asp-for="UserName" type="hidden" />
+
+                <div class="col-12 form-group">
+                    <label asp-for="Role" class="control-label"></label>
+                    <select asp-for="Role" class="form-control" asp-items="Html.GetEnumSelectList<Roles>()"></select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <h5>Change password</h5>
+                    <hr />
+                </div>
+                <div class="col-12 form-group">
+                    <label asp-for="CurrentPassword" class="control-label"></label>
+                    <input asp-for="CurrentPassword" class="form-control" />
+                    <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                </div>
+
+                <div class="col-6 form-group">
+                    <label class="control-label">New Password</label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="col-6 form-group">
+                    <label class="control-label">Confirm new Password</label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Save</button>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer text-muted">
+        <a href="#" onclick="GetElements('Users')" class="btn btn-outline-dark"><i class="fas fa-arrow-left"></i> Back to List</a>
+        <a href="#" data-dismiss="modal" class="btn btn-outline-secondary"><i class="fas fa-times"></i> Close</a>
+    </div>
+</div>
+
+@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+<script>
+    document.querySelector("#frmEdit").addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!$(e.target).valid()) {
+            return;
+        }
+
+        Swal.fire({
+            title: msgloading,
+            text: msgLoadingWait,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            },
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            showConfirmButton: false
+        });
+
+        const request = await fetch(e.target.action, {
+            method: "POST",
+            body: new FormData(e.target)
+        });
+
+        if (request.ok) {
+            const result = await request.text();
+            $("#detailsItemsModalDiv").html(result);
+            $("#detailsItemsModal").modal("show");
+            Swal.close();
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops!",
+                text: "Something went wrong"
+            });
+        }
+    });
+
+</script>

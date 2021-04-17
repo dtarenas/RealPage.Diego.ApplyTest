@@ -1,0 +1,106 @@
+﻿@model IEnumerable<RealPage.Diego.ApplyTest.Core.DTOs.Responses.Users.UserDTO>
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="clearfix">
+            <div class="float-left">
+                <h4>Users</h4>
+            </div>
+            <div class="float-right">
+                <a href="#" onclick="AddEditElements(0, 'Users')" class="btn btn-primary"><i class="fas fa-user-plus"></i> Create New</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FullName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Role)
+                        </th>
+                        @if (User.IsInRole(nameof(Roles.Admin)))
+                        {
+                            <th>
+                                Password
+                            </th>
+                        }
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Role)
+                            </td>
+                            @if (User.IsInRole(nameof(Roles.Admin)))
+                            {
+                                <td>
+                                    @item.Password
+                                </td>
+                            }
+                            <td>
+                                <a href="#" onclick="AddEditElements(@item.UserId, 'Users')" class="btn btn-info"><i class="fas fa-edit"></i> Edit</a> |
+                                <a href="#" onclick="DeleteElement(@item.UserId, 'Users')" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        <a href="#" data-dismiss="modal" class="btn btn-outline-secondary"><i class="fas fa-times"></i> Close</a>
+    </div>
+</div>
+
+<script>
+    if ("@TempData["CreateOk"]") {
+        Swal.fire({
+            toast: true,
+            icon: "success",
+            title: "Success!",
+            text: "Record saved successful"
+        });
+    }
+
+
+    if ("@TempData["EditOk"]") {
+        Swal.fire({
+            toast: true,
+            icon: "success",
+            title: "Success!",
+            text: "Record edited successful"
+        });
+    }
+
+    if ("@TempData["DeleteOk"]") {
+        Swal.fire({
+            toast: true,
+            icon: "success",
+            title: "Success!",
+            text: "Record deleted successful"
+        });
+    }
+</script>

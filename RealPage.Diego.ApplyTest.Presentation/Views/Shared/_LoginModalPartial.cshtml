@@ -1,0 +1,79 @@
+﻿@model RealPage.Diego.ApplyTest.Core.DTOs.Responses.Account.LoginDTO 
+
+<section id="loginSection">
+    <!-- Modal -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmLogin">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Username"></label>
+                                    <input asp-for="Username" class="form-control" />
+                                    <span asp-validation-for="Username" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Password"></label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Log In</button>
+                                <button type="button" class="btn btn-outline-dark" onclick="ToggleRegister()">Register</button>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div id="renderLoginLoading" class="py-3"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const $frmLogin = document.querySelector("#frmLogin");
+    if ($frmLogin) {
+        $frmLogin.addEventListener('submit', async (event) => {
+            debugger;
+            event.preventDefault();
+            if (!$($frmLogin).valid()) {
+                return;
+            }
+
+            const $renderLoginLoading = document.querySelector("#renderLoginLoading");
+            $renderLoginLoading.innerHTML = `<i class="fas fa-spinner fa-spin fa-3x fa-fw"></i><span class="lead">Loading...</span>`;
+            const loginRequest = await fetch('/Account/Login/', {
+                method: "POST",
+                body: new FormData($frmLogin)
+            });
+
+            debugger;
+            if (loginRequest.ok) {
+                if (loginRequest.redirected) {
+                    $frmLogin.reset();
+                    $('#login').modal('hide');
+                    window.location = loginRequest.url;
+                    return;
+                }
+
+                $renderLoginLoading.innerHTML = '<div class="alert alert-danger" role="alert"> An error ocurred login 😥</div>';
+
+            } else {
+                $renderLoginLoading.innerHTML = '<div class="alert alert-danger" role="alert"> An error ocurred login 😥</div>';
+            }
+        });
+    }
+</script>

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Core", "1. Core", "{029BEC23-70C3-43BB-9E4E-262DF0F3401C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. DAL", "2. DAL", "{52671699-59AE-47FD-8B12-3D0D7EAA9B36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. BL", "3. BL", "{63B61BBB-0023-4BE2-8464-7FE166A73A99}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Presentation", "4. Presentation", "{564904E9-BF27-4B17-A4F1-73F7756A7EA2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealPage.Diego.ApplyTest.Core", "RealPage.Diego.ApplyTest.Core\RealPage.Diego.ApplyTest.Core.csproj", "{3C3C058E-FDDF-440C-8A3E-21B7D9F95B10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealPage.Diego.ApplyTest.DAL", "RealPage.Diego.ApplyTest.DAL\RealPage.Diego.ApplyTest.DAL.csproj", "{BDC8D968-3A9B-4823-A0F6-1DDA59A219EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealPage.Diego.ApplyTest.BL", "RealPage.Diego.ApplyTest.BL\RealPage.Diego.ApplyTest.BL.csproj", "{89FAFF2D-7E6C-4130-B884-CFF34DE455D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealPage.Diego.ApplyTest.Presentation", "RealPage.Diego.ApplyTest.Presentation\RealPage.Diego.ApplyTest.Presentation.csproj", "{36AAE8E8-5508-4714-BDE7-F38BABEC1E1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C3C058E-FDDF-440C-8A3E-21B7D9F95B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C3C058E-FDDF-440C-8A3E-21B7D9F95B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C3C058E-FDDF-440C-8A3E-21B7D9F95B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C3C058E-FDDF-440C-8A3E-21B7D9F95B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDC8D968-3A9B-4823-A0F6-1DDA59A219EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDC8D968-3A9B-4823-A0F6-1DDA59A219EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDC8D968-3A9B-4823-A0F6-1DDA59A219EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDC8D968-3A9B-4823-A0F6-1DDA59A219EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89FAFF2D-7E6C-4130-B884-CFF34DE455D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89FAFF2D-7E6C-4130-B884-CFF34DE455D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89FAFF2D-7E6C-4130-B884-CFF34DE455D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89FAFF2D-7E6C-4130-B884-CFF34DE455D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36AAE8E8-5508-4714-BDE7-F38BABEC1E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36AAE8E8-5508-4714-BDE7-F38BABEC1E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36AAE8E8-5508-4714-BDE7-F38BABEC1E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36AAE8E8-5508-4714-BDE7-F38BABEC1E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C3C058E-FDDF-440C-8A3E-21B7D9F95B10} = {029BEC23-70C3-43BB-9E4E-262DF0F3401C}
+		{BDC8D968-3A9B-4823-A0F6-1DDA59A219EE} = {52671699-59AE-47FD-8B12-3D0D7EAA9B36}
+		{89FAFF2D-7E6C-4130-B884-CFF34DE455D8} = {63B61BBB-0023-4BE2-8464-7FE166A73A99}
+		{36AAE8E8-5508-4714-BDE7-F38BABEC1E1A} = {564904E9-BF27-4B17-A4F1-73F7756A7EA2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4D4F9A8-8B3C-4F7C-9271-E829783F41E5}
+	EndGlobalSection
+EndGlobal
