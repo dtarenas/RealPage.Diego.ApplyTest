@@ -14,6 +14,7 @@ namespace RealPage.Diego.ApplyTest.Presentation
     using RealPage.Diego.ApplyTest.DAL.Repo;
     using RealPage.Diego.ApplyTest.DAL.Repo.Facades;
     using System;
+    using System.Net.Http.Headers;
 
     /// <summary>
     /// Startup class
@@ -66,6 +67,13 @@ namespace RealPage.Diego.ApplyTest.Presentation
             services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
             services.AddScoped<IUserBL, UserBL>();
             services.AddScoped<IAccountBL, AccountBL>();
+            services.AddScoped<ITvMazeServiceBL, TvMazeServiceBL>();
+
+            ////Http Clients Services
+            services.AddHttpClient("TVmaze", x => {
+                x.BaseAddress = new Uri(this.Configuration.GetSection("TVmazeSettings").GetValue<string>("BaseAddress"));
+                x.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
