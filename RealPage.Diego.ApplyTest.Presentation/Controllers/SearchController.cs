@@ -32,7 +32,7 @@
         public async Task<IActionResult> Index(string id)
         {
             var searchResult = await this._tvMazeServiceBL.SearchByKeywords(id);
-            return View();
+            return this.PartialView(searchResult.ObjResult);
         }
     }
 }

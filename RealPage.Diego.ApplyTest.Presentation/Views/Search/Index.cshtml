@@ -1,0 +1,59 @@
+﻿@model IEnumerable<RealPage.Diego.ApplyTest.Core.DTOs.Resquests.TvMaze.Shows.SearchDTO>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h3>Shows Results</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <form id="frmMoreFilters">
+            <div class="form-group form-inline">
+                <label class="col-form-label">Advance Filter:</label>
+                <select class="form-control mx-1" asp-items="Html.GetEnumSelectList<AdditionalFilters>()"></select>
+                <input type="search" class="form-control mx-1" name="morefilter" list="filterOptions">
+                <input class="btn btn-info mx-1" type="submit" value="Filter">
+            </div>
+        </form>
+
+        <datalist id="filterOptions">
+            <option value="Language" />
+            <option value="Genre" />
+            <option value="Channel" />
+        </datalist> 
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-striped" width="100" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Score</th>
+                        <th>Language</th>
+                        <th>Genre</th>
+                        <th>Channel</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var show in Model)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => show.Show.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => show.Score)</td>
+                        <td>@Html.DisplayFor(modelItem => show.Show.Language)</td>
+                        <td>@Html.DisplayFor(modelItem => show.Show.Genres)</td>
+                        <td>@Html.DisplayFor(modelItem => show.Show.WebChannel)</td>
+                        <td><a class="btn btn-outline-warning"><i class="fas fa-align-justify"></i></a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <hr>
+    </div>
+</div>

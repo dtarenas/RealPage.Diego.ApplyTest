@@ -37,25 +37,27 @@
         </div>
     </div>
 </section>
-<section id="tvMazeSection" class="d-none">
+<section id="tvMazeSection" class="p-3 d-none">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <form id="frmTvMazeSearch">
-                    <div class="form-row align-items-center">
-                        <div class="col-auto">
-                            <label class="sr-only" for="inlineFormInputGroup">Search</label>
-                            <div class="input-group mb-2">
-                                <input type="text" class="form-control" id="query" name="query" placeholder="Search..." required>
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <button type="submit" class="btn btn-primary m-0 p-0"><i class="fas fa-search"></i></button>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <form class="card card-sm" id="frmTvMazeSearch">
+                    <div class="card-body row no-gutters align-items-center">
+                        <!--end of col-->
+                        <div class="col">
+                            <input class="form-control form-control-lg form-control" name="query" type="search" placeholder="Search topics or keywords" required style=" border: 0; box-shadow: none;">
                         </div>
+                        <!--end of col-->
+                        <div class="col-auto">
+                            <button class="btn btn-lg btn-success" type="submit"><i class="fas fa-search"></i> Search</button>
+                        </div>
+                        <!--end of col-->
                     </div>
                 </form>
+            </div>
+            <!--end of col-->
+            <div class="col-12 py-1" id="tvMazeResultContent">
+
             </div>
         </div>
     </div>
@@ -66,6 +68,7 @@
         const $tvMazeSectionBtn = document.querySelector("#tvMazeSectionBtn");
         const $frmTvMazeSearch = document.querySelector("#frmTvMazeSearch");
         const $tvMazeSection = document.querySelector("#tvMazeSection");
+        const $tvMazeResultContent = document.querySelector("#tvMazeResultContent");
 
         if ($tvMazeSectionBtn) {
             $tvMazeSectionBtn.addEventListener("click", (e) => {
@@ -83,10 +86,61 @@
             $frmTvMazeSearch.addEventListener("submit", async (e) => {
                 debugger;
                 e.preventDefault();
-                const request = await fetch(`/Search/Index/${e.target["query"].value}`);
 
+                $tvMazeResultContent.innerHTML = `<i class="fas fa-spinner fa-spin fa-5x fa-fw"></i><br><span class="lead">Loading...</span>`;
+                try {
+                    debugger;
+                    const request = await fetch(`/Search/Index/${e.target["query"].value}`);
+                    if (request.ok) {
+                        const searchResultObj = await request.text();
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
 
-                alert("Searching");
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Searching successfully'
+                        });
+
+                       
+                        $tvMazeResultContent.innerHTML = searchResultObj;
+                        scrollTo({
+                            top: $tvMazeResultContent.offsetTop + 20,
+                            behavior: 'smooth'
+                        });
+
+                        //searchResultObj.objResult.map((record) => {
+                        //    $tvMazeResultContent.innerHTML += `<i>Score: ${record.score}</i><br><b>Show Name: ${record.show.name}</>`
+                        //});
+
+                        return;
+                    }
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops!",
+                        text: 'Something went wrong'
+                    });
+
+                    $tvMazeResultContent.innerHTML = '';
+                } catch (ex) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops!",
+                        text: ex.message,
+                        footer: 'Something went wrong'
+                    });
+
+                    $tvMazeResultContent.innerHTML = '';
+                }
             });
         }
     </script>

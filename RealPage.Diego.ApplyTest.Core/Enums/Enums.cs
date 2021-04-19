@@ -37,4 +37,28 @@
         [Display(Name = "Enable")]
         Enable = 1
     }
+
+    /// <summary>
+    /// Additional Filters
+    /// </summary>
+    public enum AdditionalFilters
+    {
+        /// <summary>
+        /// The by language
+        /// </summary>
+        [Display(Name = "By Language")]
+        ByLanguage = 1,
+
+        /// <summary>
+        /// The by genre
+        /// </summary>
+        [Display(Name = "By Genre")]
+        ByGenre = 2,
+
+        /// <summary>
+        /// The by channel
+        /// </summary>
+        [Display(Name = "By Channel")]
+        ByChannel = 3
+    }
 }

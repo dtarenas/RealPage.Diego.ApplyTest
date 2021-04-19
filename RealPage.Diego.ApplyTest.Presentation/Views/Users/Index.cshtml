@@ -1,5 +1,6 @@
-﻿@model IEnumerable<RealPage.Diego.ApplyTest.Core.DTOs.Responses.Users.UserDTO>
-
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<RealPage.Diego.ApplyTest.Core.DTOs.Responses.Users.UserDTO>
+@inject IHttpContextAccessor HttpContextAccessor
 
 <div class="card">
     <div class="card-header">
@@ -29,7 +30,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Role)
                         </th>
-                        @if (User.IsInRole(nameof(Roles.Admin)))
+                        @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")) && Encrypt.Base64Decode(HttpContextAccessor.HttpContext.Session.GetString("Role")) == Roles.Admin.ToString())
                         {
                             <th>
                                 Password
@@ -54,7 +55,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Role)
                             </td>
-                            @if (User.IsInRole(nameof(Roles.Admin)))
+                            @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")) && Encrypt.Base64Decode(HttpContextAccessor.HttpContext.Session.GetString("Role")) == Roles.Admin.ToString())
                             {
                                 <td>
                                     @item.Password
