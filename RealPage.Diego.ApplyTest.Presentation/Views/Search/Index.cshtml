@@ -9,26 +9,8 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <form id="frmMoreFilters">
-            <div class="form-group form-inline">
-                <label class="col-form-label">Advance Filter:</label>
-                <select class="form-control mx-1" asp-items="Html.GetEnumSelectList<AdditionalFilters>()"></select>
-                <input type="search" class="form-control mx-1" name="morefilter" list="filterOptions">
-                <input class="btn btn-info mx-1" type="submit" value="Filter">
-            </div>
-        </form>
-
-        <datalist id="filterOptions">
-            <option value="Language" />
-            <option value="Genre" />
-            <option value="Channel" />
-        </datalist> 
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
         <div class="table-responsive">
-            <table class="table table-striped" width="100" cellspacing="0">
+            <table class="table table-striped" width="100" cellspacing="0" id="table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -42,14 +24,19 @@
                 <tbody>
                     @foreach (var show in Model)
                     {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => show.Show.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => show.Score)</td>
-                        <td>@Html.DisplayFor(modelItem => show.Show.Language)</td>
-                        <td>@Html.DisplayFor(modelItem => show.Show.Genres)</td>
-                        <td>@Html.DisplayFor(modelItem => show.Show.WebChannel)</td>
-                        <td><a class="btn btn-outline-warning"><i class="fas fa-align-justify"></i></a></td>
-                    </tr>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => show.Show.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => show.Score)</td>
+                            <td>@Html.DisplayFor(modelItem => show.Show.Language)</td>
+                            <td>
+                                @foreach (var item in show.Show.Genres)
+                                {
+                                    <div>@item</div>
+                                }
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => show.Show.WebChannel.Name)</td>
+                            <td><a class="btn btn-outline-warning" href="#" onclick="DetailsElements(@show.Show.Id, 'Search')"><i class="fas fa-align-justify"></i></a></td>
+                        </tr>
                     }
                 </tbody>
             </table>

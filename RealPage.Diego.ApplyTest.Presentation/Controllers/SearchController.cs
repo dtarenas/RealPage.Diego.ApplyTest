@@ -32,7 +32,105 @@
         public async Task<IActionResult> Index(string id)
         {
             var searchResult = await this._tvMazeServiceBL.SearchByKeywords(id);
-            return this.PartialView(searchResult.ObjResult);
+            if (searchResult.IsSuccess)
+            { 
+                return this.PartialView(searchResult.ObjResult);
+            }
+            else
+            {
+                return this.BadRequest(searchResult.Message);
+            }
+        }
+
+        /// <summary>
+        /// Detailses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Details(int id)
+        {
+            var searchResult = await this._tvMazeServiceBL.SearchById(id);
+            if (searchResult.IsSuccess)
+            {
+                TempData["ShowId"] = searchResult.ObjResult.Id;
+                return this.PartialView(searchResult.ObjResult);
+            }
+            else
+            {
+                return this.BadRequest(searchResult.Message);
+            }
+        }
+
+        /// <summary>
+        /// Seasonses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Seasons(int id)
+        {
+            var searchResult = await this._tvMazeServiceBL.SearchSeasons(id);
+            if (searchResult.IsSuccess)
+            {
+                return this.PartialView(searchResult.ObjResult);
+            }
+            else
+            {
+                return this.BadRequest(searchResult.Message);
+            }
+        }
+
+        /// <summary>
+        /// Episodeses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Episodes(int id)
+        {
+            var searchResult = await this._tvMazeServiceBL.SearchEpisodes(id);
+            if (searchResult.IsSuccess)
+            {
+                return this.PartialView(searchResult.ObjResult);
+            }
+            else
+            {
+                return this.BadRequest(searchResult.Message);
+            }
+        }
+
+        /// <summary>
+        /// Episodeses the by date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns></returns>
+        public async Task<IActionResult> EpisodesByDate(int id, string date)
+        {
+            var searchResult = await this._tvMazeServiceBL.SearchEpisodes(id, date);
+            if (searchResult.IsSuccess)
+            {
+                return this.PartialView(nameof(Episodes), searchResult.ObjResult);
+            }
+            else
+            {
+                return this.BadRequest(searchResult.Message);
+            }
+        }
+
+        /// <summary>
+        /// Casts the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Cast(int id)
+        {
+            var searchResult = await this._tvMazeServiceBL.SearchCast(id);
+            if (searchResult.IsSuccess)
+            {
+                return this.PartialView(searchResult.ObjResult);
+            }
+            else
+            {
+                return this.BadRequest(searchResult.Message);
+            }
         }
     }
 }

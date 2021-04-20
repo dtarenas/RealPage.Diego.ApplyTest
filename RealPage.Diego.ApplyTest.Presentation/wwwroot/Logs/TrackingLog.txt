@@ -28,3 +28,16 @@ LogId: b1092b10-2faa-4688-b71c-0bb75d39301a Registred On: 04/17/2021 02:12:04 PM
 LogId: 9ddb0e19-7b2a-4076-9b76-dd8d86335721 Registred On: 04/17/2021 02:12:15 PM Info: USERS has been ADDED PK: UserId -2147482646
 LogId: 4b72a319-0659-4b88-aef0-0632f891abea Registred On: 04/17/2021 02:12:27 PM Info: USERS has been MODIFIED PK: UserId 15
 LogId: a89181d9-5c32-4f90-a35e-b9a7dfc9cf42 Registred On: 04/17/2021 04:52:16 PM Info: USERS has been MODIFIED PK: UserId 14
+LogId: 599676ca-c822-4fda-8243-964e39130a1a Registred On: 04/19/2021 03:58:35 PM Info: USERS has been DELETED PK: UserId 15
+LogId: 5e6dcea2-7179-4cd5-8944-f6899d988d33 Registred On: 04/19/2021 03:59:07 PM Info: USERS has been ADDED PK: UserId -2147482647
+LogId: 6e171647-bb75-4eef-acc3-959a0021d83b Registred On: 04/19/2021 04:05:06 PM Info: USERS has been DELETED PK: UserId 17
+LogId: 27fbc9a7-9a0d-4f83-9d15-234c14f61dce Registred On: 04/19/2021 06:35:48 PM Info: USERS has been ADDED PK: UserId -2147482647
+LogId: d3a2ce94-2a7e-4a81-9627-d4b1729b905f Registred On: 04/19/2021 06:38:14 PM Info: USERS has been DELETED PK: UserId 18
+LogId: 5232210b-a7a6-4976-ae94-1fa7e649f449 Registred On: 04/19/2021 06:41:27 PM Info: USERS has been ADDED PK: UserId -2147482647
+LogId: c1729e7d-ad4c-40e4-8a85-604999de6292 Registred On: 04/19/2021 06:48:22 PM Info: USERS has been DELETED PK: UserId 19
+LogId: 72ca1a13-d341-473e-9e73-9d5950441ac5 Registred On: 04/19/2021 07:11:40 PM Info: USERS has been ADDED PK: UserId -2147482647
+LogId: 18a099d9-41bd-4ecf-8f67-608debaf4ec8 Registred On: 04/19/2021 07:17:32 PM Info: USERS has been DELETED PK: UserId 20
+LogId: 43d90b13-55e9-4ad4-997d-9305fdf3fd63 Registred On: 04/19/2021 07:27:07 PM Info: USERS has been ADDED PK: UserId -2147482646
+LogId: b22b8c5f-384a-447c-a338-ac3f4e647fe7 Registred On: 04/19/2021 07:27:33 PM Info: USERS has been DELETED PK: UserId 21
+LogId: fafa1377-1ec2-40ae-9e6d-c57df5b00798 Registred On: 04/19/2021 07:34:54 PM Info: USERS has been ADDED PK: UserId -2147482645
+LogId: 3b831018-b379-4a4b-a3c3-29a9314becca Registred On: 04/19/2021 07:40:37 PM Info: USERS has been DELETED PK: UserId 22

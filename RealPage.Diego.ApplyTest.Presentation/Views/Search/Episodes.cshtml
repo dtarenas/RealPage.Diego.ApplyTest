@@ -1,0 +1,32 @@
+﻿@model List<RealPage.Diego.ApplyTest.Core.DTOs.Resquests.TvMaze.Shows.Episodes.EpisodeDTO>
+    <div class="col-10 offset-1 py-2 border">
+        <h5>Episodes</h5>
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="col-4 m-0 p-0 text-center">
+                        <img loading="lazy" src="@Html.Raw(item.Image?.Original ?? item.Image?.Medium ?? "https://via.placeholder.com/100x150/48D1CC/000000")" class="img-thumbnail img-fluid" />
+                    </div>
+                    <div class="col-8">
+                        <ul>
+                            <li><b>Name:</b> @item.Name</li>
+                            <li><b>Number:</b> @item.Number</li>
+                            <li><b>Type:</b> @item.Type</li>
+                            <li><b>Airdate:</b> @item.Airdate</li>
+                            <li><b>Runtime:</b> @item.Runtime</li>
+                        </ul>
+
+                        @Html.Raw(item.Summary ?? "No Info")
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>
+                No Info
+            </p>
+        }
+    </div>

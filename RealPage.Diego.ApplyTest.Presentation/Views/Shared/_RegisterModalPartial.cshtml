@@ -16,7 +16,7 @@
                                 <h5>Register</h5>
                             </div>
                             <div class="float-right">
-                                <a class="btn btn-outline-primary m-0 float-right" href="#" onclick="ToggleLogin()"><i class="fa fa-user"></i> LogIn</a>
+                                <a class="btn btn-outline-primary m-0 float-right" href="#" onclick="ToggleLogin()"><i class="fa fa-user"></i> Log In</a>
                             </div>
                         </div>
                     </div>
@@ -70,3 +70,39 @@
     </div>
 </div>
 
+<script>
+    /** Listeners  **/
+    const $frmRegister = document.querySelector("#frmRegister");
+    if ($frmRegister) {
+        $frmRegister.addEventListener('submit', async (event) => {
+            
+            event.preventDefault();
+            if (!$($frmRegister).valid()) {
+                return;
+            }
+
+            let $renderRegisterLoading = document.querySelector("#renderRegisterLoading");
+            $renderRegisterLoading.innerHTML = `<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i><span class="lead">Processing...</span>`;
+            const registerRequest = await fetch('/Account/Register/', {
+                method: "POST",
+                body: new FormData($frmRegister)
+            });
+
+            if (registerRequest.ok) {
+                $frmRegister.reset();
+                const result = await registerRequest.text();
+                if (result == 'true') {
+                    $renderRegisterLoading.innerHTML = `<div class="alert alert-success" role="alert">Register Successful!</div>`;
+                } else {
+                    $renderRegisterLoading.innerHTML = `<div class="alert alert-danger" role="alert"> Something went wrong. 😥 </div>`;
+                }
+            } else {
+                if (registerRequest.status == 400) {
+                    $renderRegisterLoading.innerHTML = `<div class="alert alert-info" role="alert">Username is already Taken</div>`;
+                } else {
+                    $renderRegisterLoading.innerHTML = `<div class="alert alert-danger" role="alert"> Something went wrong. 😥 </div>`;
+                }
+            }
+        });
+    }
+</script>

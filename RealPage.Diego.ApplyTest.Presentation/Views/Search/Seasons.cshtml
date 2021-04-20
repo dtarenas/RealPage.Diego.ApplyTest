@@ -1,0 +1,41 @@
+﻿@model List<RealPage.Diego.ApplyTest.Core.DTOs.Resquests.TvMaze.Shows.Seasons.SeasonDTO>
+
+<h4>Seasons</h4>
+@if (Model.Any())
+{
+    @foreach (var item in Model)
+    {
+        var episodeSectionId = $"renderEpisodesId{item.Id}";
+        <div class="row">
+            <div class="col-4 m-0 p-0 text-center">
+                <img loading="lazy" src="@Html.Raw(item.Image?.Medium ?? item.Image?.Original ?? "https://via.placeholder.com/100x150/48D1CC/000000")" class="img-thumbnail img-fluid" />
+            </div>
+            <div class="col-8">
+                <ul>
+                    <li><b>Name:</b> @item.Name</li>
+                    <li><b>Number:</b> @item.Number</li>
+                    <li><b>Episode Order:</b> @item.EpisodeOrder</li>
+                    <li><b>Premiere Date:</b> @item.PremiereDate</li>
+                    <li><b>End Date:</b> @item.EndDate</li>
+                </ul>
+
+                <h6>Summary</h6>
+                <p>
+                    @Html.Raw(item.Summary ?? "No info")
+                </p>
+            </div>
+            <div class="col-12">
+                <a class="btn btn-outline-primary" href="#" onclick="RenderEpisodes(@item.Id, 'Search',  '@episodeSectionId')"><i class="fas fa-plus"></i> Show All Episodes</a>
+                <a class="btn btn-outline-success" href="#" onclick="RenderEpisodesByDate('@TempData["ShowId"]', 'Search',  '@episodeSectionId')"><i class="fas fa-search"></i> Search By Date</a>
+                <div id="@episodeSectionId"></div>
+            </div>
+        </div>
+        <hr />
+    }
+}
+else
+{
+    <p>
+        No Info
+    </p>
+}

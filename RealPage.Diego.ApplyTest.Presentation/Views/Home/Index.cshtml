@@ -19,7 +19,14 @@
                 @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Username")))
                 {
                     <h4>Select an option.</h4>
-                    <h5 class="text-muted">You are Admin</h5>
+                    @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")) && Encrypt.Base64Decode(HttpContextAccessor.HttpContext.Session.GetString("Role")) == Roles.Admin.ToString())
+                    {
+                        <h5 class="text-muted">You are <b>Admin</b></h5>
+                    }
+                    else
+                    {
+                        <h5 class="text-muted">You are <b>Standard User</b></h5>
+                    }
                     <a class="btn btn-outline-info" href="#" id="tvMazeSectionBtn">Search On TV Maze</a>
 
                     @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")) && Encrypt.Base64Decode(HttpContextAccessor.HttpContext.Session.GetString("Role")) == Roles.Admin.ToString())
@@ -84,12 +91,9 @@
 
         if ($frmTvMazeSearch) {
             $frmTvMazeSearch.addEventListener("submit", async (e) => {
-                debugger;
                 e.preventDefault();
-
-                $tvMazeResultContent.innerHTML = `<i class="fas fa-spinner fa-spin fa-5x fa-fw"></i><br><span class="lead">Loading...</span>`;
+                $tvMazeResultContent.innerHTML = `<div class='text-center'><i class="fas fa-spinner fa-spin fa-5x fa-fw"></i><br><span class="lead">Loading...</span></div>`;
                 try {
-                    debugger;
                     const request = await fetch(`/Search/Index/${e.target["query"].value}`);
                     if (request.ok) {
                         const searchResultObj = await request.text();
@@ -110,16 +114,19 @@
                             title: 'Searching successfully'
                         });
 
-                       
+
                         $tvMazeResultContent.innerHTML = searchResultObj;
+                        $('#table').DataTable({
+                            paging: true,
+                            ordering: true,
+                            scrollY: true,
+                            searching: true,
+                            responsive: true
+                        });
                         scrollTo({
-                            top: $tvMazeResultContent.offsetTop + 20,
+                            top: $tvMazeResultContent.offsetTop + 10,
                             behavior: 'smooth'
                         });
-
-                        //searchResultObj.objResult.map((record) => {
-                        //    $tvMazeResultContent.innerHTML += `<i>Score: ${record.score}</i><br><b>Show Name: ${record.show.name}</>`
-                        //});
 
                         return;
                     }

@@ -47,7 +47,7 @@
     const $frmLogin = document.querySelector("#frmLogin");
     if ($frmLogin) {
         $frmLogin.addEventListener('submit', async (event) => {
-            debugger;
+            
             event.preventDefault();
             if (!$($frmLogin).valid()) {
                 return;
@@ -60,7 +60,7 @@
                 body: new FormData($frmLogin)
             });
 
-            debugger;
+            
             if (loginRequest.ok) {
                 if (loginRequest.redirected) {
                     $frmLogin.reset();

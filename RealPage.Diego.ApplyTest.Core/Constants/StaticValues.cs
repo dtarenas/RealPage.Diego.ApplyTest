@@ -29,5 +29,10 @@
         /// The log file name
         /// </summary>
         public const string LogFileName = "TrackingLog.txt";
+
+        /// <summary>
+        /// The script file name
+        /// </summary>
+        public const string ScriptFileName = "DatabaseScripts.sql";
     }
 }

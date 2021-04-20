@@ -1,0 +1,123 @@
+﻿@model RealPage.Diego.ApplyTest.Core.DTOs.Resquests.TvMaze.Shows.ShowDTO
+
+<div class="container-fluid">
+    <div class="card">
+        <h5 class="card-header">@Html.DisplayFor(x => x.Name)</h5>
+        <div class="card-body">
+            <div class="text-center py-1">
+                <span class="text-muted">Rating: @Html.DisplayFor(x => x.Rating.Average)</span> | <span class="text-muted">Type: @Html.DisplayFor(x => x.Type)</span> | <span class="text-muted">Status: @Html.DisplayFor(x => x.Status)</span> |
+                <span class="text-muted">Official Site: <a href="@Model.OfficialSite" target="_blank">Here</a></span> | <span class="text-muted">Language: @Html.DisplayFor(x => x.Language)</span> | <span class="text-muted">Premiered: @Html.DisplayFor(x => x.Premiered)</span>
+            </div>
+            <div class="row">
+                <div class="col-4 m-0 p-0 text-center">
+                    <img loading="lazy" src="@Html.Raw(Model.Image?.Original ?? Model.Image?.Medium ?? "https://via.placeholder.com/400x800/48D1CC/000000")" class="img-thumbnail img-fluid" />
+                </div>
+                <div class="col-8">
+                    <p class="h4">Summary</p>
+                    <p class="card-text">
+                        @Html.Raw(Model.Summary)
+                    </p>
+                    <h6>More Info</h6>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        Schedule
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <span class="font-weight-bold">Time:</span> @Model.Schedule.Time
+                                        </div>
+                                        <div class="col-8">
+                                            <ul>
+                                                @foreach (var item in Model.Schedule.Days)
+                                                {
+                                                    <li>@item</li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Network
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div><span class="font-weight-bold">Name:</span> @Html.Raw(Model.Network?.Name ?? "No info")</div>
+                                    <div><span class="font-weight-bold">Country:</span> @Html.Raw(Model.Network?.Country?.Name ?? "No info")</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Channel
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div><span class="font-weight-bold">Name:</span> @Html.Raw(Model.WebChannel?.Name ?? "No info")</div>
+                                    <div><span class="font-weight-bold">Country:</span> @Html.Raw(Model.WebChannel?.Country?.Name ?? "No info")</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingZero">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseZero" aria-expanded="false" aria-controls="collapseZero">
+                                        Cast
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseZero" class="collapse" aria-labelledby="headingZero" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div id="renderCast"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        Seasons
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div id="renderSeasons"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (async () => {
+        await Promise.all([
+            RenderSeasons(@Model.Id, 'Search', 'renderSeasons'),
+            RenderCast(@Model.Id, 'Search', 'renderCast')
+        ]);
+    })();
+</script>

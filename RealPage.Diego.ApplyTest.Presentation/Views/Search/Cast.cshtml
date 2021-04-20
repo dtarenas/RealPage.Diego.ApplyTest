@@ -1,0 +1,60 @@
+﻿@model List<RealPage.Diego.ApplyTest.Core.DTOs.Resquests.TvMaze.Shows.Cast.CastDTO>
+
+
+<div class="row">
+    @if (Model.Any())
+    {
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped" width="100" cellspacing="0" id="table">
+                    <thead>
+                        <tr>
+                            <th>Person</th>
+                            <th>Character</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cast in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img loading="lazy" src="@Html.Raw(cast.Person.Image?.Original ?? cast.Person.Image?.Medium ?? "https://via.placeholder.com/400x800/48D1CC/000000")" class="img-thumbnail rounded-circle img-fluid" style="max-height: 150px;" />
+                                        </div>
+                                        <div class="col-8">
+                                            <b>@Html.DisplayNameFor(modelItem => cast.Person.Name):</b> @Html.DisplayFor(modelItem => cast.Person.Name) <br />
+                                            <b>@Html.DisplayNameFor(modelItem => cast.Person.Birthday):</b> @Html.DisplayFor(modelItem => cast.Person.Birthday) <br />
+                                            <b>@Html.DisplayNameFor(modelItem => cast.Person.Deathday):</b> @Html.DisplayFor(modelItem => cast.Person.Deathday)<br />
+                                            <b>@Html.DisplayNameFor(modelItem => cast.Person.Gender):</b> @Html.DisplayFor(modelItem => cast.Person.Gender)<br />
+                                            <b>Country:</b> @Html.DisplayFor(modelItem => cast.Person.Country.Name)
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img loading="lazy" src="@Html.Raw(cast.Character.Image?.Original ?? cast.Character.Image?.Medium ?? "https://via.placeholder.com/400x800/48D1CC/000000")" class="img-thumbnail rounded-circle img-fluid" style="max-height: 150px;" />
+                                        </div>
+                                        <div class="col-8">
+                                            <b>@Html.DisplayNameFor(modelItem => cast.Character.Name):</b> @Html.DisplayFor(modelItem => cast.Character.Name)
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+        </div>
+
+    }
+    else
+    {
+        <p>
+            No Info
+        </p>
+    }
+
+</div>
